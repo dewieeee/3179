@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Deviation in Maximum Average Temperature in Australia Between 2014 and 2023",
+  "width": 600,
+  "height": 450,
+  "projection": {
+    "type": "equirectangular",
+    "scale": 650,
+    "translate": [-1200, -75]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Week%209%20Homework/output.json",
+        "format": {"type": "topojson", "feature": "STE_2016_AUST"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.STE_NAME16",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Week%209%20Homework/weatherdata.csv"
+            },
+            "key": "State",
+            "fields": ["MaxTemp", "MeanMaxTemp", "SDMaxTemp"]
+          }
+        },
+        {
+          "calculate": "(datum.MaxTemp - datum.MeanMaxTemp) / datum.SDMaxTemp",
+          "as": "Deviation"
+        }
+      ],
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {
+          "field": "Deviation",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [-1, 0, 1],
+            "range": ["#2c7bb6", "#abd9e9", "#fdae61", "#d7191c"]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.STE_NAME16",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "MaxTemp",
+            "type": "quantitative",
+            "title": "Maximum Temperature(°C)"
+          },
+          {
+            "field": "Deviation",
+            "type": "quantitative",
+            "title": "Deviation(°C)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {"graticule": true},
+      "mark": {"type": "geoshape", "stroke": "grey", "strokeWidth": 0.5}
+    }
+  ],
+  "config": {"background": "#F3FAF9"}
+}
