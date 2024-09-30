@@ -1,0 +1,146 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 220,
+    "height": 200,
+    "title": ["Maximum Temperatures of Australian", "States/Territories from 2014 to 2023"],
+    "data": {
+      "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/week10_homework/weatherdata.csv"
+    },
+    "params": [
+      {
+        "name": "state_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Australian Capital Territory",
+            "New South Wales",
+            "Northern Territory",
+            "Queensland", 
+            "South Australia",
+            "Tasmania", 
+            "Victoria", 
+            "Western Australia"
+          ],
+          "labels": [
+            "Show All",
+            "Australian Capital Territory",
+            "New South Wales",
+            "Northern Territory",
+            "Queensland", 
+            "South Australia",
+            "Tasmania", 
+            "Victoria", 
+            "Western Australia"
+          ],
+          "name": "State/Territory: "
+        }
+      }
+    ],
+    "transform": [
+      {"filter": "datum.Year > 0"},
+      {"filter": "datum.MaxTemp > 0"},
+      {
+      "filter": "state_selection == null || datum.State == state_selection"
+      },
+      {
+        "window": [
+          {
+            "op": "mean",
+            "field": "MaxTemp",
+            "as": "Average Maximum Temperature for the State"
+          }
+        ],
+        "groupby": ["State"]
+      },
+      {
+        "calculate": "datum.MaxTemp - datum['Average Maximum Temperature for the State']",
+        "as": "Deviation"
+      }
+    ],
+    "encoding": {
+      "x": {
+        "field": "Year",
+        "type": "temporal",
+        "timeUnit": "year",
+        "title": "Year",
+        "axis": {"tickCount": 10}
+      },
+      "y": {
+        "field": "MaxTemp",
+        "type": "quantitative",
+        "title": "Maximum Temperature",
+        "axis": {"tickCount": 6},
+        "scale": {"domain": [30,48]}
+      }
+    },
+    "layer": [
+      {
+        "mark": "line",
+        "encoding": {
+          "color": {
+            "field": "State",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Australian Capital Territory",
+                "New South Wales",
+                "Northern Territory",
+                "Queensland", 
+                "South Australia",
+                "Tasmania", 
+                "Victoria", 
+                "Western Australia"
+              ],
+              "range": [
+                "#1b9e77",
+                "#d95f02",
+                "#7570b3",
+                "#e7298a",
+                "#66a61e",
+                "#e6ab02",
+                "#a6761d",
+                "#666666"
+              ]
+            }
+          },
+          "opacity": {"value": 0.6},
+          "tooltip": [
+            {"field": "State", "type": "nominal"},
+            {"field": "Year", "type": "temporal", "timeUnit": "year", "title": "Year"},
+            {"field": "MaxTemp", "type": "quantitative", "title": "Maximum Temperature"},
+            {"field": "Average Maximum Temperature for the State", "type": "quantitative", "format": ".1f"},
+            {"field": "Deviation", "type": "quantitative", "title": "Deviation from Average", "format": ".1f"}
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "baseline": "middle",
+          "dx": 2,
+          "fontSize": 11.5,
+          "fontStyle": "italic"
+        },
+        "encoding": {
+          "text": {"field": "MaxTemp", "type": "nominal"},
+          "color": {"value": "black"},
+          "opacity": {
+            "condition": {
+              "test": "datum['MaxTemp'] == 45.8 || datum['MaxTemp'] == 31.5 || datum['MaxTemp'] == 44.4 || datum['MaxTemp'] == 33.1 || datum['MaxTemp'] == 34.5",
+              "value": 1
+            },
+            "value": 0
+          },
+          "tooltip": [
+            {"field": "State", "type": "nominal"},
+            {"field": "Year", "type": "temporal", "timeUnit": "year", "title": "Year"},
+            {"field": "MaxTemp", "type": "quantitative", "title": "Maximum Temperature"},
+            {"field": "Average Maximum Temperature for the State", "type": "quantitative", "format": ".1f"},
+            {"field": "Deviation", "type": "quantitative", "title": "Deviation from Average", "format": ".1f"}
+          ]
+        }
+      }
+    ]
+  }
