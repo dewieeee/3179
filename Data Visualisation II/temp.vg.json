@@ -1,0 +1,72 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": ["Distribution of Temperatures at 9am and 3pm in Australia Between 2014 and 2023"],
+    "width": 570,
+    "height": 200,
+    "data": {
+      "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Data%20Visualisation%20II/weatherdata.csv"
+    },
+    "transform": [
+      {
+        "fold": ["Temp9am", "Temp3pm"],
+        "as": ["Time", "Temp"]
+      },
+      {
+        "calculate": "if(datum.Temp >= 0 & datum.Temp < 10,-2,0) + if(datum.Temp >= 10 & datum.Temp <= 15,-1,0) + if(datum.Temp > 15 & datum.Temp <= 23,0,0) + if(datum.Temp > 23 & datum.Temp < 28,1,0) + if(datum.Temp >= 28,2,0)",
+        "as": "q_order"
+      },
+      {
+        "aggregate": [
+          {
+            "op": "count",
+            "as": "count"
+          }
+        ],
+        "groupby": ["Time", "q_order"]
+      },
+      {
+        "joinaggregate": [
+          {
+            "op": "sum",
+            "field": "count",
+            "as": "total_count"
+          }
+        ],
+        "groupby": ["Time"]
+      },
+      {
+        "calculate": "datum.count > 0 ? (datum.count / datum.total_count * 100) : 0",
+        "as": "percentage"
+      }  
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Percentage (%)"
+      },
+      "y": {
+        "field": "Time",
+        "type": "nominal",
+        "title": "Time"
+      },
+      "color": {
+        "field": "q_order",
+        "type": "nominal",
+        "title": "Temperature Bracket",
+        "scale": {
+          "domain": [-2, -1, 0, 1, 2],
+          "range": ["#1770ab", "#94c6da", "#cccccc", "#f3a583", "#c30d24"],
+          "type": "ordinal"
+        },
+        "legend": {
+          "values": [-2, -1, 0, 1, 2],
+          "labelExpr": "{'-2': '< 10°C', '-1': '10°C - 15°C', '0': '16°C - 23°C', '1': '24°C - 27°C', '2': '28°C +'}[datum.value]"
+        }
+      },
+      "tooltip": [
+        {"field": "percentage", "type": "quantitative", "title": "Percentage (%)"}
+      ]
+    }
+  }

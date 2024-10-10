@@ -1,0 +1,129 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 220,
+    "height": 220,
+      "title": ["Effect of Minimum Temperature on Rainfall", "in Australia Between 2014 and 2023"],
+      "data": {
+        "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Data%20Visualisation%20II/weatherdata.csv"
+      },
+      "params": [
+        {
+          "name": "state_selection",
+          "bind": {
+            "input": "select",
+            "options": [
+              null,
+              "Australian Capital Territory",
+              "New South Wales",
+              "Northern Territory",
+              "Queensland", 
+              "South Australia",
+              "Tasmania", 
+              "Victoria", 
+              "Western Australia"
+            ],
+            "labels": [
+              "Show All",
+              "Australian Capital Territory",
+              "New South Wales",
+              "Northern Territory",
+              "Queensland", 
+              "South Australia",
+              "Tasmania", 
+              "Victoria", 
+              "Western Australia"
+            ],
+            "name": "State/Territory: "
+          }
+        }
+      ],
+      "transform": [
+        {"filter": "datum.MinTemp > 0"},
+        {
+          "calculate": "datum.Rainfall / 1000",
+          "as": "Rainfall"
+        },
+        {
+        "filter": "state_selection == null || datum.State == state_selection"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "MinTemp",
+          "type": "quantitative",
+          "title": "Minimum Temperature (°C)",
+          "scale": {"domain": [0,20]}
+        },
+        "y": {
+          "field": "Rainfall",
+          "type": "quantitative",
+          "title": "Rainfall (mm)",
+          "axis": {"tickCount": 6}
+        }
+      },
+      "layer": [
+        {
+          "mark": "point",
+          "encoding": {
+            "color": {
+              "field": "State",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Australian Capital Territory",
+                  "New South Wales",
+                  "Northern Territory",
+                  "Queensland", 
+                  "South Australia",
+                  "Tasmania", 
+                  "Victoria", 
+                  "Western Australia"
+                ],
+                "range": [
+                  "#1b9e77",
+                  "#d95f02",
+                  "#7570b3",
+                  "#e7298a",
+                  "#66a61e",
+                  "#e6ab02",
+                  "#a6761d",
+                  "#666666"
+                ]
+              }
+            },
+            "opacity": {"value": 0.6},
+            "tooltip": [
+              {"field": "State", "type": "nominal"},
+              {"field": "MinTemp", "type": "quantitative", "title": "Minimum Temperature (°C)"},
+              {"field": "Rainfall", "type": "quantitative", "title": "Rainfall (mm)", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "dx": 4,
+            "fontSize": 11.5,
+            "fontStyle": "italic"
+          },
+          "encoding": {
+            "text": {"field": "Rainfall", "type": "quantitative", "format": ".1f"},
+            "color": {"value": "black"},
+            "opacity": {
+              "condition": {
+                "test": "datum['MinTemp'] == 15.4 || datum['MinTemp'] == 1.4 || datum['MinTemp'] == 17.4",
+                "value": 1
+              },
+              "value": 0
+            },
+            "tooltip": [
+              {"field": "State", "type": "nominal"},
+              {"field": "MinTemp", "type": "quantitative", "title": "Minimum Temperature (°C)"},
+              {"field": "Rainfall", "type": "quantitative", "title": "Rainfall (mm)", "format": ".1f"}
+            ]
+          }
+        }
+      ]
+    }

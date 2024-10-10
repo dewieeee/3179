@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 220,
+    "width": 250,
     "height": 200,
     "title": ["Maximum Temperatures of Australian", "States/Territories from 2014 to 2023"],
     "data": {

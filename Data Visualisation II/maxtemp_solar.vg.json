@@ -1,0 +1,125 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 220,
+    "height": 220,
+    "title": ["Effect of Maximum Temperature on Solar", "in Australia Between 2014 and 2023"],
+    "data": {
+      "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Data%20Visualisation%20II/weatherdata.csv"
+    },
+    "params": [
+      {
+        "name": "state_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Australian Capital Territory",
+            "New South Wales",
+            "Northern Territory",
+            "Queensland", 
+            "South Australia",
+            "Tasmania", 
+            "Victoria", 
+            "Western Australia"
+          ],
+          "labels": [
+            "Show All",
+            "Australian Capital Territory",
+            "New South Wales",
+            "Northern Territory",
+            "Queensland", 
+            "South Australia",
+            "Tasmania", 
+            "Victoria", 
+            "Western Australia"
+          ],
+          "name": "State/Territory: "
+        }
+      }
+    ],
+    "transform": [
+      {
+      "filter": "state_selection == null || datum.State == state_selection"
+      }
+    ],
+    "encoding": {
+      "x": {
+        "field": "MaxTemp",
+        "type": "quantitative",
+        "title": "Maximum Temperature (°C)",
+        "axis": {"tickCount": 6},
+        "scale": {"domain": [25,50]}
+      },
+      "y": {
+        "field": "Solar",
+        "type": "quantitative",
+        "title": "Solar (kW)",
+        "scale": {"domain": [10,24]}
+      }
+    },
+      "layer": [
+        {
+          "mark": "point",
+          "encoding": {
+            "color": {
+              "field": "State",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Australian Capital Territory",
+                  "New South Wales",
+                  "Northern Territory",
+                  "Queensland", 
+                  "South Australia",
+                  "Tasmania", 
+                  "Victoria", 
+                  "Western Australia"
+                ],
+                "range": [
+                  "#1b9e77",
+                  "#d95f02",
+                  "#7570b3",
+                  "#e7298a",
+                  "#66a61e",
+                  "#e6ab02",
+                  "#a6761d",
+                  "#666666"
+                ]
+              }
+            },
+            "opacity": {"value": 0.6},
+            "tooltip": [
+              {"field": "State", "type": "nominal"},
+              {"field": "MaxTemp", "type": "quantitative", "title": "Maximum Temperature (°C)"},
+              {"field": "Solar", "type": "quantitative", "title": "Solar (kW)", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "baseline": "bottom",
+            "dx": -3,
+            "fontSize": 11.5,
+            "fontStyle": "italic"
+          },
+          "encoding": {
+            "text": {"field": "Solar", "type": "quantitative", "format": ".1f"},
+            "color": {"value": "black"},
+            "opacity": {
+              "condition": {
+                "test": "datum['MaxTemp'] == 31.5 || datum['MaxTemp'] == 45.8 || datum['MaxTemp'] == 38.2",
+                "value": 1
+              },
+              "value": 0
+            },
+            "tooltip": [
+              {"field": "State", "type": "nominal"},
+              {"field": "MaxTemp", "type": "quantitative", "title": "Maximum Temperature (°C)"},
+              {"field": "Solar", "type": "quantitative", "title": "Solar (kW)", "format": ".1f"}
+            ]
+          }
+        }
+      ]
+    }
