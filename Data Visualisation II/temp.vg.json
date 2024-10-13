@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": ["Distribution of Temperatures at 9am and 3pm in Australia Between 2014 and 2023"],
-    "width": 570,
+    "width": 800,
     "height": 200,
     "data": {
       "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Data%20Visualisation%20II/weatherdata.csv"
@@ -10,6 +10,10 @@
       {
         "fold": ["Temp9am", "Temp3pm"],
         "as": ["Time", "Temp"]
+      },
+      {
+        "calculate": "if(datum.Time == 'Temp9am', '9am', if(datum.Time == 'Temp3pm', '3pm', datum.Time))",
+        "as": "Time"
       },
       {
         "calculate": "if(datum.Temp >= 0 & datum.Temp < 10,-2,0) + if(datum.Temp >= 10 & datum.Temp <= 15,-1,0) + if(datum.Temp > 15 & datum.Temp <= 23,0,0) + if(datum.Temp > 23 & datum.Temp < 28,1,0) + if(datum.Temp >= 28,2,0)",

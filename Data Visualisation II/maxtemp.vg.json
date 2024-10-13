@@ -1,12 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": ["Deviation in Maximum Average Temperature", "in Australia Between 2014 and 2023"],
-  "width": 340,
-  "height": 250,
+  "width": 350,
+  "height": 260,
   "projection": {
     "type": "equirectangular",
-    "scale": 400,
-    "translate": [-750, -60]
+    "scale": 410,
+    "translate": [-780, -60]
   },
   "layer": [
     {
