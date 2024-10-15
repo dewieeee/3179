@@ -1,40 +1,103 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": ["Effect of Solar on Evaporation", "in Australia Between 2014 and 2023"],
-    "width": 270,
-    "height": 220,
-    "data": {
-      "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Data%20Visualisation%20II/weatherdata.csv"
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 270,
+  "height": 220,
+  "data": {
+    "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Data%20Visualisation%20II/weatherdata.csv"
+  },
+  "transform": [
+    {
+      "calculate": "if(datum.Solar >= 12 && datum.Solar <= 13.5, -2, if(datum.Solar > 13.5 && datum.Solar <= 15, -1, if(datum.Solar > 15 && datum.Solar <= 16.5, 0, if(datum.Solar > 16.5 && datum.Solar < 18, 1, if(datum.Solar > 18 && datum.Solar < 19.5, 2, if(datum.Solar > 19.5 && datum.Solar < 21, 3, if(datum.Solar > 21 && datum.Solar < 22.5, 4, null)))))))",
+      "as": "bins"
     },
-    "transform": [
-      {
-        "calculate": "if(datum.Solar >= 12 & datum.Solar <= 13.5,-2,0) + if(datum.Solar > 13.5 & datum.Solar <= 15,-1,0) + if(datum.Solar > 15 & datum.Solar <= 16.5,0,0) + if(datum.Solar > 16.5 & datum.Solar < 18,1,0) + if(datum.Solar > 18 & datum.Solar < 19.5,2,0) + if(datum.Solar > 19.5 & datum.Solar < 21,3,0) + if(datum.Solar > 21 & datum.Solar < 22.5,4,0)",
-        "as": "bins"
-      }
-    ],
-    "mark": "bar",
-    "encoding": {
-      "x": {
-        "field": "bins",
-        "type": "nominal",
-        "title": "Solar (kW)",
-        "axis": {
-          "labelAngle": 0,  
-          "labelExpr": "datum.value == -2 ? '12-13.5' : datum.value == -1 ? '13.5-15' : datum.value == 0 ? '15-16.5' : datum.value == 1 ? '16.5-18' : datum.value == 2 ? '18-19.5' : datum.value == 3 ? '19.5-21' : datum.value == 4 ? '21-22.5' : ''"
+    {
+      "filter": "datum.bins != null"  
+    },
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "Evaporation",
+          "as": "meanEvaporation"
         }
-      },
-      "y": {
-        "field": "Evaporation",
-        "type": "quantitative",
-        "title": "Evaporation (mm/kWh)"
-      },
-      "xOffset": {"field": "State"},
-      "color": {
-        "field": "State"
-      },
-      "tooltip": [
-        {"field": "State", "type": "nominal"},
-        {"field": "Evaporation", "type": "quantitative", "title": "Evaporation (mm/kWh)"}
-      ]
+      ],
+      "groupby": ["bins", "State"]  
+    },
+    {
+      "calculate": "round(datum.meanEvaporation * 10) / 10", 
+      "as": "roundedMeanEvaporation"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "mean",
+          "field": "roundedMeanEvaporation",
+          "as": "meanEvaporationBin"
+        }
+      ],
+      "groupby": ["bins"]  
+    },
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "rank"
+        }
+      ],
+      "groupby": ["bins"]  
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "bins",
+      "type": "nominal",
+      "title": "Solar Exposure (kW)",
+      "axis": {
+        "labelAngle": 0,
+        "labelExpr": "datum.value == -2 ? '12-13.5' : datum.value == -1 ? '13.5-15' : datum.value == 0 ? '15-16.5' : datum.value == 1 ? '16.5-18' : datum.value == 2 ? '18-19.5' : datum.value == 3 ? '19.5-21' : datum.value == 4 ? '21-22.5' : ''"
+      }
+    },
+    "y": {
+      "field": "roundedMeanEvaporation",  
+      "type": "quantitative",
+      "title": "Mean Evaporation (mm/kWh)",
+      "stack": "zero"  
+    },
+    "color": {
+      "field": "State",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Australian Capital Territory",
+          "New South Wales",
+          "Northern Territory",
+          "Queensland",
+          "South Australia",
+          "Tasmania",
+          "Victoria",
+          "Western Australia"
+        ],
+        "range": [
+          "#1b9e77",
+          "#d95f02",
+          "#7570b3",
+          "#e7298a",
+          "#66a61e",
+          "#e6ab02",
+          "#a6761d",
+          "#666666"
+        ]
+      }
+    },
+    "tooltip": [
+      {"field": "State", "type": "nominal"},
+      {"field": "roundedMeanEvaporation", "type": "quantitative", "title": "Mean Evaporation (mm/kWh)"}
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": "transparent"
     }
   }
+}

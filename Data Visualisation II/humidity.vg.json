@@ -1,0 +1,65 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 250,
+    "height": 220,
+    "data": {
+      "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Data%20Visualisation%20II/weatherdata.csv"
+    },
+    "transform": [
+      {
+        "fold": ["Humidity9am", "Humidity3pm"],
+        "as": ["Time", "Humidity"]
+      },
+      {
+        "aggregate": [
+          {
+            "op": "mean",
+            "field": "Humidity",
+            "as": "Mean Humidity"
+          }
+        ],
+        "groupby": ["State"]
+      }
+    ],
+    "mark": {"type": "arc", "innerRadius": 50},
+    "encoding": {
+      "theta": {"field": "Mean Humidity", "type": "quantitative"},
+      "color": {
+        "field": "State", 
+        "type": "nominal",
+        "scale": {
+            "domain": [
+              "Australian Capital Territory",
+              "New South Wales",
+              "Northern Territory",
+              "Queensland",
+              "South Australia",
+              "Tasmania",
+              "Victoria",
+              "Western Australia"
+            ],
+            "range": [
+              "#1b9e77",
+              "#d95f02",
+              "#7570b3",
+              "#e7298a",
+              "#66a61e",
+              "#e6ab02",
+              "#a6761d",
+              "#666666"
+            ]
+          }
+    },
+      "tooltip": [
+        {
+          "field": "State",
+          "type": "nominal"
+        },
+        {
+          "field": "Mean Humidity",
+          "type": "quantitative",
+          "title": "Mean Humidity (g/kg)"
+        }
+      ]
+    }
+  }

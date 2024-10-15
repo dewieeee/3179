@@ -2,7 +2,6 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 220,
     "height": 220,
-      "title": ["Effect of Minimum Temperature on Rainfall", "in Australia Between 2014 and 2023"],
       "data": {
         "url": "https://raw.githubusercontent.com/dewieeee/3179/refs/heads/main/Data%20Visualisation%20II/weatherdata.csv"
       },
@@ -45,6 +44,10 @@
         },
         {
         "filter": "state_selection == null || datum.State == state_selection"
+        },
+        {
+          "calculate": "format(datum.Rainfall, '.1f')+ ' mm'", 
+          "as": "RainfallWithUnit"
         }
       ],
       "encoding": {
@@ -102,14 +105,15 @@
         {
           "mark": {
             "type": "text",
-            "align": "left",
+            "align": "center",
             "baseline": "top",
-            "dx": 4,
+            "dx": 8,
+            "dy": 5,
             "fontSize": 11.5,
             "fontStyle": "italic"
           },
           "encoding": {
-            "text": {"field": "Rainfall", "type": "quantitative", "format": ".1f"},
+            "text": {"field": "RainfallWithUnit", "type": "nominal"},
             "color": {"value": "black"},
             "opacity": {
               "condition": {

@@ -27,14 +27,14 @@
     <!-- TITLE SECTION -->
     <div class="title">
       <div class="pure-g">
-        <div class="pure-u-5-24">
+        <div class="pure-u-3-24">
           <img src="https://camo.githubusercontent.com/3e2cb99f5cffde7ee86df1d530f6dff4cc6e0443a519feed3ed0d91cfd94464b/68747470733a2f2f626d63646e2e6e6c2f6173736574732f776561746865722d69636f6e732f76332e302f66696c6c2f7376672f706172746c792d636c6f7564792d6461792e737667"
           class="titleImage">
         </div>
-        <div class="pure-u-14-24">
+        <div class="pure-u-18-24">
           <h1>Weather Conditions in Australia</h1>  
         </div>
-        <div class="pure-u-5-24">
+        <div class="pure-u-3-24">
           <img src="https://camo.githubusercontent.com/3e2cb99f5cffde7ee86df1d530f6dff4cc6e0443a519feed3ed0d91cfd94464b/68747470733a2f2f626d63646e2e6e6c2f6173736574732f776561746865722d69636f6e732f76332e302f66696c6c2f7376672f706172746c792d636c6f7564792d6461792e737667"
           class="titleImage">
         </div>
@@ -54,21 +54,23 @@
       <div class="pure-g">
         <div class="pure-u-1-2">
           <div class="description-left">
-            <p class="chartTitle">Deviation in Maximum Temperature from 2014 to 2023</p>
+            <p class="chartTitle">Deviation in Maximum Temperature</p>
             <div id="maxtemp" class="vis-container"></div>
           </div>
         </div>
         <div class="pure-u-1-2">
           <div class="description-right">
-            <p> In Australia, there is a large variation in maximum temperatures 
-              between states and territories. For example, <span style="color: #303030;">Western Australia</span>, 
-              known for its arid climate, reached a peak of 48°C during the height 
-              of summer, reflecting its exposure to extreme heat. In contrast, <strong> Tasmania, 
-              which has a temperate maritime climate, recorded a milder maximum 
-              temperature of 31°C</strong>. This stark contrast highlights the <strong>diversity of Australia's 
-              climate zones</strong>, from the scorching deserts in the interior to the cooler, more 
-              temperate regions in the south. These extremes in temperature have significant 
-              implications for regional agriculture, energy consumption, and public health.</p>
+            <div class="text">
+              <p> In Australia, there is a large variation in maximum temperatures 
+                between states and territories. For example, <span style="color: #4d4b4b;">Western Australia</span>, 
+                known for its arid climate, reached a peak of 48°C during the height 
+                of summer, reflecting its exposure to extreme heat. In contrast, <span style="color: #e6ab02">Tasmania</span>, 
+                which has a temperate maritime climate, recorded a milder maximum 
+                temperature of 31°C. This stark contrast highlights the diversity of Australia's 
+                climate zones, from the scorching deserts in the interior to the cooler, more 
+                temperate regions in the south. These extremes in temperature have significant 
+                implications for regional agriculture, energy consumption, and public health.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -76,38 +78,50 @@
       <div class="pure-g">
         <div class="pure-u-1-2">
           <div class="description-left">
-            <p> Traveling across Australia, you can observe how maximum temperatures vary 
-              significantly from one region to another. The <strong>Northern Territory 
-              often records maximum temperatures of 46°C during the summer months</strong>. Inland regions, 
-              far from the moderating influence of the sea, are particularly prone to these higher 
-              temperatures. In contrast, <strong>coastal areas like New South Wales and Victoria generally 
-              experience more moderate heat, with temperatures ranging between 35°C and 40°C</strong>. These 
-              differences illustrate how Australia's geography plays a key role in shaping its climate, 
-              with the cooler coastal areas contrasting sharply with the hotter inland regions.</p>
+            <div class="text">
+              <p> Traveling across Australia, you can observe how minimum temperatures vary 
+                significantly from one region to another. The <span style="color: #7570b3;">Northern Territory</span> 
+                often records minimum temperatures of 17.4°C during the summer months. Inland regions, 
+                far from the moderating influence of the sea, are particularly prone to these higher minimum 
+                temperatures. In contrast, coastal areas like <span style="color: #d95f02;">New South Wales</span> and 
+                <span style="color: #a6761d;">Victoria</span> generally experience more moderate heat, with temperatures ranging between -5°C and 10°C. 
+                These differences illustrate how Australia's geography plays a key role in shaping its climate, 
+                with the cooler coastal areas contrasting sharply with the hotter inland regions.</p>
+            </div>
           </div>
         </div>
         <div class="pure-u-1-2">
           <div class="description-right">
-            <div id="statemaxtemp" class="vis-container">
+            <p class="chartTitle">Minimum Temperatures from 2014 to 2023</p>
+            <div id="statemintemp" class="vis-container">
           </div>
         </div>
       </div>
       <!-- Temperatures -->
       <div class="pure-g">
         <div class="pure-u-1-1">
-          <div id="temp" class="vis-container">
+          <div class="description">
+            <p class="chartTitle">Temperatures at 9am and 3pm from 2014 to 2023</p>
+            <div id="temp" class="vis-container">
+          </div>
         </div>
       </div>
       <div class="pure-g">
-        <div class="pure-u-1-1">
-          <p> The graph above highlights the relationship between maximum temperatures and solar 
-            exposure across different regions of Australia. For example, <strong>Queensland, which 
-            receives over 25 MJ/m²/day of solar energy, often records temperatures exceeding 
-            45°C</strong>. The high levels of solar radiation directly influence the intense heat experienced 
-            in this region. On the other hand, <strong>Tasmania, with its lower solar exposure of around 18 
-            MJ/m²/day, has maximum temperatures that remain around 30°C</strong>. The differences in solar 
-            energy received across the country are a key factor in the varying temperature profiles, 
-            illustrating how sunlight drives much of Australia's weather patterns.</p>
+        <div class="pure-u-1-2">
+          <div class="description-left">
+            <div class="text">
+              <p> The graph above highlights the relationship between maximum temperatures and solar 
+                exposure across different regions of Australia.  
+            </div>
+          </div>
+        </div>
+        <div class="pure-u-1-2">
+          <div class="description-right">
+            <div class="text">
+              <p>For example, <span style="color: #e7298a"> Queensland</span>, often records temperatures exceeding 
+                45°C. On the other hand, <span style="color: #e6ab02">Tasmania</span>, has maximum temperatures that remain around 30°C. </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -118,7 +132,7 @@
       <div class="pure-g">
         <div class="pure-u-1-1">
           <div class="subtitle">
-            <h2>Solar</h2>
+            <h2>Solar Exposure, Humidity & Evaporation</h2>
           </div>
         </div>
       </div>
@@ -127,36 +141,64 @@
       <div class="pure-g">
         <div class="pure-u-1-2">
           <div class="description-left">
+            <p class="chartTitle">Impact of Maximum Temperature on Solar Exposure</p>
             <div id="maxtemp_solar" class="vis-container"></div>
           </div>
         </div>
         <div class="pure-u-1-2">
           <div class="description-right">
-            <p> In regions such as <strong>South Australia, where solar exposure reaches 28 MJ/m²/day, evaporation 
-              rates are correspondingly high, often exceeding 10 mm/day</strong>. This means that water evaporates 
-              quickly in these sun-soaked areas, which poses challenges for agriculture and water management. 
-              In contrast, regions with lower solar exposure, such as <strong>parts of Victoria, experience much lower 
-              evaporation rates—around 3-4 mm/day</strong>. Understanding this relationship between sunlight and water 
-              loss is crucial for effective resource management, particularly in areas that rely on irrigation 
-              or have limited water supplies.</p>
+            <div class="text">
+              <p> In regions such as <span style="color: #7570b3;">Northern Territory</span>, where solar exposure reaches 36.9 kW/day, maximum 
+                temperatures are correspondingly high, often exceeding 35°C/day. This means that water evaporates 
+                quickly in these sun-soaked areas, which poses challenges for agriculture and water management. 
+                In contrast, regions with lower solar exposure, such as parts of <span style="color: #e6ab02">Tasmania</span>, experience much lower 
+                temperatures, around less than 35°C/day. Understanding this relationship between sunlight and water 
+                loss is crucial for effective resource management, particularly in areas that rely on irrigation 
+                or have limited water supplies.</p>
+            </div>
           </div>
         </div>
       </div>
-      <!-- Solar/Evaporation -->
+      <!-- Humidity -->
       <div class="pure-g">
         <div class="pure-u-1-2">
           <div class="description-left">
-            <p>In this graph, we can see how minimum temperatures relate to rainfall across various regions of 
-              Australia. <strong>Queensland experiences minimum temperatures as low as 10°C during the 
-              wet season, often coupled with heavy rainfall totals of over 400 mm</strong>. In contrast, regions like 
-            <strong>Western Australia, where minimum temperatures remain higher, around 20°C, tend to see much less 
-              rainfall, often below 50 mm</strong>. This relationship reflects the broader climatic patterns, where cooler, 
-              tropical regions tend to receive more rainfall, while warmer, arid regions experience drier conditions.</p>
+            <div class="text">
+              <p>This donut chart visualises the mean humidity levels, both at 9 am and 3 pm, across various Australian 
+                states. The mean humidity is calculated for each state, and the chart uses color to distinguish between 
+                different states. The size of each slice represents the mean humidity for that state, allowing for easy 
+                comparison between regions. States with larger slices, like <span style="color: #e7298a">Queensland</span> or <span style="color: #d95f02;">New South Wales</span>, likely 
+                experience higher average humidity compared to others. The tooltip provides additional context, displaying 
+                the exact mean humidity values in grams per kilogram (g/kg) when hovering over each slice. </p>
+            </div>
           </div>
         </div>
         <div class="pure-u-1-2">
           <div class="description-right">
+            <p class="chartTitle">Mean Humidity of Australian States/Territories</p>
+            <div id="humidity" class="vis-container"></div>
+          </div>
+        </div>
+      </div>
+    
+    
+    <!-- Solar/Evaporation -->
+      <div class="pure-g">
+        <div class="pure-u-1-2">
+          <div class="description-left">
+            <p class="chartTitle">Impact of Solar Exposure on Evaporation</p>
             <div id="solar_evap" class="vis-container"></div>
+          </div>
+        </div>
+        <div class="pure-u-1-2">
+          <div class="description-right">
+            <div class="text">
+              <p>The graph visualizes the relationship between solar exposure (kW) and mean evaporation (mm/kWh) 
+                across various Australian states. Different bins of solar exposure are represented on the x-axis, ranging 
+                from 12-22.5 kW, while the y-axis shows the corresponding mean evaporation rates. For example, <span style="color: #e7298a">Queensland</span>
+                exhibits a peak mean evaporation of approximately 4.5 mm/kWh at the 19.5-21 kW solar exposure range. In 
+                contrast, <span style="color: #e6ab02">Tasmania</span> displays a lower evaporation rate, reaching around 2 mm/kWh within the same range.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -177,27 +219,63 @@
       <div class="pure-g">
         <div class="pure-u-1-2">
           <div class="description-left">
+            <p class="chartTitle">Impact of Minimum Temperature on Rainfall</p>
             <div id="mintemp_rainfall" class="vis-container"></div>
           </div>
         </div>
         <div class="pure-u-1-2">
           <div class="description-right">
-            <p> This graph provides a broad overview of how temperatures change across Australia throughout the year. 
-              During the winter months, <strong>Tasmania experiences average temperatures as low as 5°C</strong>, reflecting its southern, 
-              cooler climate. In contrast, <strong>northern regions like Queensland and the Northern Territory rarely see 
-              temperatures drop below 20°C</strong>, even during winter. In the summer, temperatures in <strong>Western Australia and 
-              the Northern Territory often exceed 40°C</strong>, highlighting the extreme heat that characterizes these regions. 
-              Understanding these temperature trends is key for planning agricultural cycles, energy consumption, and 
-              preparing for the impacts of extreme weather events.</p>
+            <div class="text">
+              <p> This graph provides a broad overview of how temperatures change across Australia throughout the year. 
+                During the winter months, <span style="color: #e6ab02">Tasmania</span> experiences average temperatures as low as 5°C, reflecting its southern, 
+                cooler climate. In contrast, northern regions like <span style="color: #e7298a">Queensland</span> and the <span style="color: #7570b3;">Northern Territory</span> rarely see 
+                temperatures drop below 20°C, even during winter. Understanding these temperature trends is key for planning agricultural cycles, energy consumption, and preparing for the 
+                impacts of extreme weather events. Additionally, this knowledge helps inform infrastructure development and disaster response strategies in different regions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Rainfall-->
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+          <div class="description">
+            <p class="chartTitle">Rainfall by Year</p>
+            <div id="rainfall_map" class="vis-container">
+          </div>
+        </div>
+      </div>
+      <div class="pure-g">
+        <div class="pure-u-1-2">
+          <div class="description-left">
+            <div class="text">
+              <p> The data emphasizes the diverse climatic conditions across Australia, influencing agriculture and water 
+                resources. Understanding these rainfall patterns is crucial for effective management strategies. 
+            </div>
+          </div>
+        </div>
+        <div class="pure-u-1-2">
+          <div class="description-right">
+            <div class="text">
+              <p>By 
+                analysing trends, policymakers can better prepare for droughts and floods, ensuring sustainable practices 
+                that benefit both the environment and local communities.</p>
+            </div>
           </div>
         </div>
       </div>
       <!-- end pure grid group -->
 
       <!-- Ending -->
+  
+
       <div class="pure-g">
-        <div class="pure-u-1-1 small-font">
-          <p>This visualisation is created by Dingyi Yu. The datasource is <a href="#" target=" _blank">https://reg.bom.gov.au/climate/data/</href>.</p>
+        <div class="pure-u-1-1">
+          <div class="vis-container">
+            <div class="text">
+              <p>This visualisation is created by Dingyi Yu. The datasource is <a href="#" target=" _blank">https://reg.bom.gov.au/climate/data/</href>.</p>
+            </div>
+          </div>
         </div>
       </div>
       <!-- end pure grid group -->
@@ -209,14 +287,16 @@
     
 
   <script type="text/javascript">
-    var specVis1 = "./statemaxtemp.vg.json";
+    var specVis1 = "./statemintemp.vg.json";
     var specVis2 = "./maxtemp.vg.json";
     var specVis3 = "./maxtemp_solar.vg.json";
     var specVis4 = "./solar_evap.vg.json";
     var specVis5 = "./mintemp_rainfall.vg.json";
     var specVis6 = "./temp.vg.json";
+    var specVis7 = "./humidity.vg.json";
+    var specVis8 = "./rainfall_map.vg.json";
 
-    vegaEmbed('#statemaxtemp', specVis1, { "actions": false });
+    vegaEmbed('#statemintemp', specVis1, { "actions": false });
 
     vegaEmbed('#maxtemp', specVis2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
@@ -235,6 +315,14 @@
     }).catch(console.error);
 
     vegaEmbed('#temp', specVis6, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#humidity', specVis7, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#rainfall_map', specVis8, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
