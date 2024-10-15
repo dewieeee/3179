@@ -29,7 +29,11 @@
           "as": "Deviation"
         }
       ],
-      "mark": {"type": "geoshape"},
+      "mark": {
+        "type": "geoshape",
+        "stroke": "black",  
+        "strokeWidth": 1       
+      },
       "encoding": {
         "color": {
           "field": "Deviation",
